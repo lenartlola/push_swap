@@ -6,9 +6,21 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:28:26 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/16 19:40:02 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/16 19:44:26 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* I use a special kind of atoi, therefore I'll implement
+ * my_atoi function which will handle some error cases.
+ */
+int	my_atoi(char *arg)
+{
+	int			i;
+	int			sign;
+	long long	value;
+
+	if (!)
+}
 
 #include "push_swap.h"
 // A standard error message.
