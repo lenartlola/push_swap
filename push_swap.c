@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:28:26 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/17 13:55:15 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/17 16:13:57 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,242 @@ int	is_sorted(t_stack *a)
 		return (0);
 }
 
+// ######################################################
+// #################### Operations ######################
+// ######################################################
+void	swap_stack(t_stack *stack, int flag)
+{
+	t_node	*tmp;
+	t_node	*top_next;
 
+	if (stack->size < 2)
+		return ;
+	top_next = stack->top->next;
+}
+
+void	reverse_rotate_stack(t_stack *stack, int flag)
+{
+	t_node	*tmp;
+	t_node	*bottom_prev;
+
+	if (stack->size)
+		return ;
+	tmp = stack->bottom;
+	bottom_prev = stack->bottom->prev;
+	stack->top->prev = tmp;
+	tmp->next = stack->top;
+	tmp->prev = NULL;
+	stack->top = tmp;
+	stack->bottom = bottom_prev;
+	stack->bottom->next = NULL;
+	if (flag == A)
+		ft_putendl_fd("rra", 1);
+	else if (flag == B)
+		ft_putendl_fd("rrb", 1);
+}
+
+void	rotate_stack(t_stack *stack, int flag)
+{
+	t_node	*tmp;
+	t_node	*top_next;
+
+	if (stack->size < 2)
+		return ;
+	tmp = stack->top;
+	top_next = stack->top->next;
+	stack->bottom->next = tmp;
+	tmp->prev = stack->bottom;
+	tmp->next = NULL;
+	stack->bottom = tmp;
+	stack->top = top_next;
+	stack->top->prev = NULL;
+	if (flag == A)
+		ft_putendl_fd("ra", 1);
+	else if (flag == B)
+		ft_putendl_fd("rb", 1);
+}
+
+// push and pop respectevly from a stack to a stack.
+static void	push_pop(t_stack *from, t_stack *to)
+{
+	if (from->size == 1)
+		from_size_one(from, to);
+	else
+	{
+		if (to->size == 0)
+		{
+			to->top = from->top;
+			to->bottom = to->bottom;
+			from->top = from->top->next;
+			from->top->prev = NULL;
+			to->top->next = NULL;
+		}
+		else
+		{
+			to->top->prev = from->top;
+			from->top = from->top->next;
+			from->top->prev = NULL;
+			to->top->prev->next = to->top;
+			to->top = to->top->prev;
+		}
+	}
+	to->size++;
+	from->size--;
+}
+
+void	push_stack(t_stack *from, t_stack *to, int flag)
+{
+	if (from->size == 0)
+		return ;
+	push_pop(from, to);
+	if (flag == A)
+		ft_putendl_fd("pa", 1);
+	else if (flag == B)
+		ft_putendl_fd("pb", 1);
+}
+
+
+// ######################################################
+// ################ Sorting Algorithms ##################
+// ######################################################
+
+// ############### Sort and get middle ##################
+// ######################################################
+
+static int	five_sort(int value[])
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = 5;
+	while (--i > 0)
+	{
+		j = -1;
+		while (++j < i)
+		{
+			if (value[i] > value[j+1])
+			{
+				tmp = value[j + 1];
+				value[j + 1] = value[j];
+				value[j] = tmp;
+			}
+		}
+	}
+	return (value[2]);
+}
+int	get_five_mid(t_node *node)
+{
+	int	i;
+	int	value[5];
+
+	i = -1;
+	while (++i < 5)
+	{
+		value[i] = node->value;
+		if (node->next)
+			node = node->next;
+		else
+			break;
+	}
+	while (node->prev)
+		node = node->prev;
+	return (five_sort(value));
+}
+
+int	get_min_value(t_node *node, int size)
+{
+	int	min;
+
+	min = node->value;
+	while (size--)
+	{
+		if (min > node->value)
+			min = node->value;
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+	}
+	while (node->prev)
+		node = node->prev;
+	return (min);
+}
+
+int	get_max_value(t_node *node, int size)
+{
+	int	max;
+
+	max = node->value;
+	while (size--)
+	{
+		if (max < node->value)
+			max = node->value;
+		if (node->next)
+			node = node->next;
+		else
+			break ;
+	}
+	while (node->prev)
+		node = node->prev;
+	return (max);
+}
+
+// ################# Three arguments ##################
+static void	three_min_min(t_stack *a, int amx)
+{
+	if (a->size == 3)
+	{
+		if (a->top->next->value == MAX)
+		{
+			reverse_rotate_stack(a, A);
+			swap_stack(a, A);
+		}
+	}
+}
+
+void	three_handler(int r, t_stack *a)
+{
+	int	min;
+	int	max;
+
+	min = get_min_value(a->top, r);
+	max = get_max_value(a->top, r);
+	if (a->top->value == min)
+		three_top_min(a, max);
+}
+
+// ################# Five arguments ###################
+void	five_handler(t_stack *a, t_stack *b)
+{
+	int	pb;
+	int	mid;
+
+	pb = 0;
+	mid = get_five_mid(a->top);
+	while (1)
+	{
+		if (a->top->value < mid)
+		{
+			push_stack(a, b, B);
+			pb++;
+		}
+		else
+			rotate_stack(a, A);
+		if (pb == 2)
+			break ;
+	}
+	three_handler(3, a);
+}
+
+void	push_swap(t_stack *a, t_stack *b)
+{
+	int	count;
+
+	count = 0;
+	if (a->size == 5)
+		five_handler();
+}
 
 /*
  * Declare the stacks and take the arguments,

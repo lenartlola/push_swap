@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:42:55 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/17 12:27:51 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/17 14:25:35 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
+
+# define A 1
+# define B 2
+# define ALL 3
 
 typedef struct	s_node	t_node;
 
