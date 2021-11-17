@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:28:26 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/17 16:13:57 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/17 17:59:10 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,20 @@ void	swap_stack(t_stack *stack, int flag)
 	if (stack->size < 2)
 		return ;
 	top_next = stack->top->next;
+	tmp = stack->top;
+	if (stack->size > 2)
+		top_next->next->prev = stack->top;
+	tmp->next = top_next->next;
+	stack->top = top_next;
+	stack->top->prev = NULL;
+	stack->top->next = tmp;
+	tmp->prev = stack->top;
+	if (stack->size == 2)
+		stack->bottom = stack->top->next;
+	if (flag == A)
+		ft_putendl_fd("sa", 1);
+	else if (flag == B)
+		ft_putendl_fd("sb", 1);
 }
 
 void	reverse_rotate_stack(t_stack *stack, int flag)
@@ -336,6 +350,23 @@ void	rotate_stack(t_stack *stack, int flag)
 }
 
 // push and pop respectevly from a stack to a stack.
+static void	from_size_one(t_stack *from, t_stack *to)
+{
+	if (to->size == 0)
+	{
+		to->top = from->top;
+		to->bottom = to->bottom;
+	}
+	else
+	{
+		to->top->prev = from->top;
+		from->top->next = to->top;
+		to->top = to->top->prev;
+	}
+	from->top = NULL;
+	from->bottom = NULL;
+}
+
 static void	push_pop(t_stack *from, t_stack *to)
 {
 	if (from->size == 1)
@@ -462,15 +493,65 @@ int	get_max_value(t_node *node, int size)
 }
 
 // ################# Three arguments ##################
-static void	three_min_min(t_stack *a, int amx)
+static void	three_top_min(t_stack *a, int max)
 {
 	if (a->size == 3)
 	{
-		if (a->top->next->value == MAX)
+		if (a->top->next->value == max)
 		{
 			reverse_rotate_stack(a, A);
 			swap_stack(a, A);
+			reverse_rotate_stack(a, A);
 		}
+	}
+	else
+	{
+		if (a->top->next->value == max)
+		{
+			rotate_stack(a, A);
+			swap_stack(a, A);
+			reverse_rotate_stack(a, A);
+		}
+	}
+}
+
+static void	three_mid_min(t_stack *a, int max)
+{
+	if (a->size == 3)
+	{
+		if (a->bottom->value == max)
+			swap_stack(a, A);
+		else
+			rotate_stack(a, A);
+	}
+	else
+	{
+		swap_stack(a, A);
+		if (a->top->next->value == max)
+		{
+			rotate_stack(a, A);
+			swap_stack(a, A);
+			reverse_rotate_stack(a, A);
+		}
+	}
+}
+
+static void	three_bottom_min(t_stack *a, int max)
+{
+	if (a->size == 3)
+	{
+		if (a->top->value == max)
+			swap_stack(a, A);
+		reverse_rotate_stack(a, A);
+	}
+	else
+	{
+		if (a->top->value == max)
+			swap_stack(a, A);
+		rotate_stack(a, A);
+		swap_stack(a, A);
+		reverse_rotate_stack(a, A);
+		swap_stack(a, A);
 	}
 }
 
@@ -483,6 +564,27 @@ void	three_handler(int r, t_stack *a)
 	max = get_max_value(a->top, r);
 	if (a->top->value == min)
 		three_top_min(a, max);
+	else if (a->top->next->value == min)
+		three_mid_min(a, max);
+	else if (a->top->next->next->value == min)
+		three_bottom_min(a, max);
+}
+
+// ################# Two arguments ###################
+void	two_handler(t_stack *a, t_stack *b, int flag)
+{
+	if (flag == A)
+	{
+		if (a->top->value > a->top->next->value)
+			swap_stack(a, A);
+	}
+	else
+	{
+		if (b->top->value < b->top->next->value)
+			swap_stack(b, B);
+		push_stack(b, a, A);
+		push_stack(b, a, A);
+	}
 }
 
 // ################# Five arguments ###################
@@ -506,6 +608,7 @@ void	five_handler(t_stack *a, t_stack *b)
 			break ;
 	}
 	three_handler(3, a);
+	two_handler(a, b, B);
 }
 
 void	push_swap(t_stack *a, t_stack *b)
@@ -514,7 +617,9 @@ void	push_swap(t_stack *a, t_stack *b)
 
 	count = 0;
 	if (a->size == 5)
-		five_handler();
+		five_handler(a, b);
+	else
+		a_to_b(a->size, a, b, &count);
 }
 
 /*
