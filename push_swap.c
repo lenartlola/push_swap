@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:28:26 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/17 17:59:10 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/17 18:55:47 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -492,8 +492,8 @@ int	get_max_value(t_node *node, int size)
 	return (max);
 }
 
-// ################# Three arguments ##################
-static void	three_top_min(t_stack *a, int max)
+// ################# Three arguments a ##################
+static void	three_top_min_a(t_stack *a, int max)
 {
 	if (a->size == 3)
 	{
@@ -515,7 +515,7 @@ static void	three_top_min(t_stack *a, int max)
 	}
 }
 
-static void	three_mid_min(t_stack *a, int max)
+static void	three_mid_min_a(t_stack *a, int max)
 {
 	if (a->size == 3)
 	{
@@ -536,7 +536,7 @@ static void	three_mid_min(t_stack *a, int max)
 	}
 }
 
-static void	three_bottom_min(t_stack *a, int max)
+static void	three_bottom_min_a(t_stack *a, int max)
 {
 	if (a->size == 3)
 	{
@@ -555,7 +555,7 @@ static void	three_bottom_min(t_stack *a, int max)
 	}
 }
 
-void	three_handler(int r, t_stack *a)
+void	three_handler_a(int r, t_stack *a)
 {
 	int	min;
 	int	max;
@@ -563,14 +563,76 @@ void	three_handler(int r, t_stack *a)
 	min = get_min_value(a->top, r);
 	max = get_max_value(a->top, r);
 	if (a->top->value == min)
-		three_top_min(a, max);
+		three_top_min_a(a, max);
 	else if (a->top->next->value == min)
-		three_mid_min(a, max);
+		three_mid_min_a(a, max);
 	else if (a->top->next->next->value == min)
-		three_bottom_min(a, max);
+		three_bottom_min_a(a, max);
 }
 
-// ################# Two arguments ###################
+// ############# Three arguments b ###############
+void	three_top_min_b(t_stack *b, int max)
+{
+	if (b->size == 3)
+	{
+		rotate_stack(b, B);
+		if (b->top->next->value == max)
+			swap_stack(b, B);
+	}
+	else
+	{
+		swap_stack(b, B);
+		rotate_stack(b, B);
+		swap_stack(b, B);
+		reverse_rotate_stack(b, B);
+		if (b->top->next->value == max)
+			swap_stack(b, B);
+	}
+}
+
+void	three_mid_min_b(t_stack *b, int max)
+{
+	if (b->size == 3)
+	{
+		reverse_rotate_stack(b, B);
+		if (b->top->next->value == max)
+			swap_stack(b, B);
+	}
+	else
+	{
+		rotate_stack(b, B);
+		swap_stack(b, B);
+		reverse_rotate_stack(b, B);
+		if (b->top->next->value == max)
+			swap_stack(b, B);
+	}
+}
+
+static void	three_bottom_min_b(t_stack *b, int max)
+{
+	if (b->top->next->value == max)
+		swap_stack(b, B);
+}
+
+void	three_handler_b(int r, t_stack *a, t_stack *b)
+{
+	int	min;
+	int	max;
+
+	min = get_min_value(b->top, r);
+	max = get_max_value(b->top, r);
+	if (b->top->value == min)
+		three_top_min_b(b, max);
+	else if (b->top->next->value == min)
+		three_mid_min_b(b, max);
+	else if (b->top->next->next->value == min)
+		three_bottom_min_b(b, max);
+	push_stack(b, a, A);
+	push_stack(b, a, A);
+	push_stack(b, a, A);
+}
+
+// ########## Two arguments || Smaller ############
 void	two_handler(t_stack *a, t_stack *b, int flag)
 {
 	if (flag == A)
@@ -586,6 +648,55 @@ void	two_handler(t_stack *a, t_stack *b, int flag)
 		push_stack(b, a, A);
 	}
 }
+
+void	under_three_handler(int r, t_stack *a, t_stack *b, int flag)
+{
+	if (r == 3)
+	{
+		if (flag == A)
+			three_handler_a(r, a);
+		else
+			three_handler_b(r, a, b);
+	}
+	else if (r == 2)
+		two_handler(a, b, flag);
+	else if (r == 1)
+	{
+		if (flag == B)
+			push_stack(b, a, A);
+	}
+}
+
+// ############# Initialize the values ##############
+void	init_values(t_value *var)
+{
+	var->ra = 0;
+	var->rb = 0;
+	var->pa = 0;
+	var->pb = 0;
+}
+
+
+// ################ above five ######################
+static int	exception(int r, t_stack *a, t_stack *b)
+{
+	if (r <= 3)
+	{
+		under_three_handler(r, a, b, A);
+		return (0);
+	}
+}
+
+void	a_to_b(int r, t_stack *a, t_stack *b, int *count)
+{
+	int		tmp;
+	t_value	var;
+
+	if (!exceptions(r, a, b))
+		return ;
+	init_values(&var);
+}
+
 
 // ################# Five arguments ###################
 void	five_handler(t_stack *a, t_stack *b)
@@ -607,7 +718,7 @@ void	five_handler(t_stack *a, t_stack *b)
 		if (pb == 2)
 			break ;
 	}
-	three_handler(3, a);
+	three_handler_b(3, a);
 	two_handler(a, b, B);
 }
 
