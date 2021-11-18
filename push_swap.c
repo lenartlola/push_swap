@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:28:26 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/17 18:58:20 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/18 15:36:21 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,89 +110,6 @@ int	is_sorted(t_stack *a)
 // ######################################################
 // ################ Sorting Algorithms ##################
 // ######################################################
-
-// ############### Sort and get middle ##################
-// ######################################################
-
-static int	five_sort(int value[])
-{
-	int	i;
-	int	j;
-	int	tmp;
-
-	i = 5;
-	while (--i > 0)
-	{
-		j = -1;
-		while (++j < i)
-		{
-			if (value[i] > value[j+1])
-			{
-				tmp = value[j + 1];
-				value[j + 1] = value[j];
-				value[j] = tmp;
-			}
-		}
-	}
-	return (value[2]);
-}
-int	get_five_mid(t_node *node)
-{
-	int	i;
-	int	value[5];
-
-	i = -1;
-	while (++i < 5)
-	{
-		value[i] = node->value;
-		if (node->next)
-			node = node->next;
-		else
-			break;
-	}
-	while (node->prev)
-		node = node->prev;
-	return (five_sort(value));
-}
-
-int	get_min_value(t_node *node, int size)
-{
-	int	min;
-
-	min = node->value;
-	while (size--)
-	{
-		if (min > node->value)
-			min = node->value;
-		if (node->next)
-			node = node->next;
-		else
-			break ;
-	}
-	while (node->prev)
-		node = node->prev;
-	return (min);
-}
-
-int	get_max_value(t_node *node, int size)
-{
-	int	max;
-
-	max = node->value;
-	while (size--)
-	{
-		if (max < node->value)
-			max = node->value;
-		if (node->next)
-			node = node->next;
-		else
-			break ;
-	}
-	while (node->prev)
-		node = node->prev;
-	return (max);
-}
-
 // ################# Three arguments a ##################
 static void	three_top_min_a(t_stack *a, int max)
 {

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/18 13:58:07 by hsabir            #+#    #+#             */
+/*   Updated: 2021/11/18 14:07:09 by hsabir           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 //*************************Argument checks****************************
@@ -50,4 +62,26 @@ int	check_args(char *args)
 		return (1);
 }
 
+void	check_duplicated(t_node *a)
+{
+	int		current_value;
+	t_node	*tmp;
 
+	while (a->next)
+	{
+		tmp = a->next;
+		current_value = a->value;
+		while (tmp)
+		{
+			if (tmp->value == current_value)
+				print_error();
+			if (tmp->next)
+				tmp = tmp->next;
+			else
+				break ;
+		}
+		a = a->next;
+	}
+	while (a->prev)
+		a = a->prev;
+}
