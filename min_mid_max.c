@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:21:06 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/18 15:35:25 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/18 17:13:31 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	five_sort(int value[])
 	}
 	return (value[2]);
 }
-int	get_five_mid(t_node *node)
+int	get_mid_five(t_node *node)
 {
 	int	i;
 	int	value[5];

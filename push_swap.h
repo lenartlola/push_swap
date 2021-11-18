@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:42:55 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/17 18:19:23 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/18 18:19:53 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,21 @@ struct	s_value
 
 t_stack	*init_stack(void);
 void	ft_error(void);
+
+// OPERATIONS
+void	push_stack(t_stack *from, t_stack *to, int flag);
+static void	push_pop(t_stack *from, t_stack *to);
+static void	from_size_one(t_stack *from, t_stack *to);
+
+// STACK UTILS
+t_node	*fill_stack(int argc, char **argv, t_stack **stack);
+int	set_node(char *argv, t_node **node, t_stack **stack);
+void	connect_nodes(t_node **tmp, t_node **node, t_stack **stack);
+
+//CHECK UTILS
+void	check_duplicated(t_node *a);
+int	check_args(char *args);
+static int	is_numeric(char *arg);
+static int	check_args_length(char *args);
 
 #endif
