@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:28:26 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/18 18:16:09 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 13:30:50 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,36 +47,6 @@ void	print_error(void)
 	ft_putendl_fd("Error\n", 2);
 }
 
-// ######################################################
-// ############A function to free the stacks.############
-// ######################################################
-static void	free_stack(t_stack *stack)
-{
-	t_node	*node;
-	t_node	*tmp;
-
-	node = stack->top;
-	while (node)
-	{
-		if (node->next)
-			tmp = node->next;
-		else
-			tmp = NULL;
-		free(node);
-		if (tmp)
-			node = tmp;
-		else
-			break;
-	}
-	free(stack);
-}
-
-void	free_all(t_stack *a, t_stack *b)
-{
-	free_stack(a);
-	free_stack(b);
-}
-
 // #######################################################
 
 /*
@@ -115,30 +85,15 @@ void	init_values(t_value *var)
 	var->pb = 0;
 }
 
-
-// ################ above five ######################
-static int	exception(int r, t_stack *a, t_stack *b)
+void	select_pivots(int r, t_stack *stack, t_value *var)
 {
-	if (r <= 3)
-	{
-		under_three_handler(r, a, b, A);
-		return (0);
-	}
-	else if (r == 5)
-	{
-		sort_five_handler(5, a, b, A);
-		return (0);
-	}
-}
+	long	min;
+	long	max;
 
-void	a_to_b(int r, t_stack *a, t_stack *b, int *count)
-{
-	int		tmp;
-	t_value	var;
-
-	if (!exceptions(r, a, b))
-		return ;
-	init_values(&var);
+	min = get_min_value(stack->top, r);
+	max = get_max_value(stack->top, r);
+	var->big_pivot = (min + max) / 2;
+	var->small_pivot = (min + var->big_pivot) / 2;
 }
 
 void	push_swap(t_stack *a, t_stack *b)

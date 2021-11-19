@@ -6,13 +6,13 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 16:56:11 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/18 18:15:57 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 13:39:34 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static void	sort_five_handler_a(int size, t_stack *, t_stack *b)
+static void	sort_five_handler_a(int size, t_stack *a, t_stack *b)
 {
 	int	mid;
 	int	push;
@@ -40,7 +40,7 @@ static void	sort_five_handler_a(int size, t_stack *, t_stack *b)
 		reverse_rotate_stack(a, A);
 }
 
-static void	sort_five_handler_b(int size, t_stack *a, t_stack b)
+static void	sort_five_handler_b(int size, t_stack *a, t_stack *b)
 {
 	int	mid;
 	int	push;
@@ -53,13 +53,13 @@ static void	sort_five_handler_b(int size, t_stack *a, t_stack b)
 	{
 		if (b->top->value >= mid)
 		{
-			push_stack(b, a,, A);
+			push_stack(b, a, A);
 			push++;
 		}
 		else
 		{
-			push_stack(b, B);
-			rotate++i;
+			rotate_stack(b, B);
+			rotate++;
 		}
 		if (push == 3)
 			break ;
@@ -84,7 +84,7 @@ void	five_handler(t_stack *a, t_stack *b)
 	int	mid;
 
 	pb = 0;
-	mid = get_five_mid(a->top);
+	mid = get_mid_five(a->top);
 	while (1)
 	{
 		if (a->top->value < mid)
@@ -97,6 +97,6 @@ void	five_handler(t_stack *a, t_stack *b)
 		if (pb == 2)
 			break ;
 	}
-	three_handler_b(3, a);
+	three_handler_a(3, a);
 	two_handler(a, b, B);
 }

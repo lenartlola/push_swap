@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 16:58:09 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/18 16:58:26 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 13:39:45 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	three_mid_min_b(t_stack *b, int max)
 	}
 }
 
-static void	three_bottom_min_b(t_stack *b, int max)
+void	three_bottom_min_b(t_stack *b, int max)
 {
 	if (b->top->next->value == max)
 		swap_stack(b, B);
