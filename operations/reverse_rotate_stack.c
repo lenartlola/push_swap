@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 09:48:09 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 13:40:26 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 15:07:41 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	reverse_rotate_stack(t_stack *stack, int flag)
 		ft_putendl_fd("rrb", 1);
 }
 
-void	reverse_totate_both_stack(t_stack *a, t_stack *b, int flag)
+void	reverse_rotate_both_stack(t_stack *a, t_stack *b, int flag)
 {
 	reverse_rotate_stack(a, flag);
 	reverse_rotate_stack(b, flag);

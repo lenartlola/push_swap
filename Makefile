@@ -6,7 +6,7 @@
 #    By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 14:09:06 by hsabir            #+#    #+#              #
-#    Updated: 2021/11/19 14:24:45 by hsabir           ###   ########.fr        #
+#    Updated: 2021/11/19 15:10:18 by hsabir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ $(OBJS_DIR)/%.o : %.c | $(OBJS_DIR)
 
 clean :
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C bonus_checker fclean
+##	@$(MAKE) -C bonus_checker fclean
 	@$(RM) -r $(OBJS_DIR)
 
 fclean : clean

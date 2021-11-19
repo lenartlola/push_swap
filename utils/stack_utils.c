@@ -1,4 +1,16 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/19 14:27:29 by hsabir            #+#    #+#             */
+/*   Updated: 2021/11/19 14:28:47 by hsabir           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../push_swap.h"
 
 /*
  * Allocate the memory to the stack
@@ -109,7 +121,7 @@ t_node	*fill_stack(int argc, char **argv, t_stack **stack)
 	t_node	*node;
 
 	i = 0;
-	while (++i)
+	while (++i < argc)
 	{
 		ret = set_node(argv[i], &node, stack);
 		if (!ret)

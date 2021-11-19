@@ -6,11 +6,11 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 13:16:34 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 13:30:55 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 14:26:36 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 static void	free_stack(t_stack *stack)
 {

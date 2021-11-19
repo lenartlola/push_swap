@@ -6,40 +6,13 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:28:26 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 13:30:50 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 15:08:23 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void	print_error(void);
-
-/* I use a special kind of atoi, therefore I'll implement
- * my_atoi function which will handle some error cases.
- */
-int	my_atoi(char *args)
-{
-	int			i;
-	int			sign;
-	long long	value;
-
-	if (!check_args(args))
-		print_error();
-	i = 0;
-	sign = 1;
-	value = 0;
-	if (args[i] == '+' || args[i] == '-')
-	{
-		if (args[i++] == '-')
-			sign = -1;
-	}
-	while (args[i])
-		value = value * 10 + (args[i++] - '0');
-	value = value * sign;
-	if (value > MAX_INT || value < MAX_INT)
-		print_error();
-	return (value);
-}
 
 // A standard error message.
 void	print_error(void)

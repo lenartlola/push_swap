@@ -6,11 +6,11 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 13:58:07 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/18 14:07:09 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 14:26:27 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 //*************************Argument checks****************************
 static int	check_args_length(char *args)

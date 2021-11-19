@@ -6,11 +6,11 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:21:06 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 13:31:03 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 14:26:45 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 static int	five_sort(int value[])
 {

@@ -6,11 +6,11 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 16:59:01 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 13:39:39 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 14:29:07 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 static void	three_top_min_a(t_stack *a, int max)
 {
