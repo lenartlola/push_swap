@@ -6,15 +6,12 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:28:26 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 15:08:23 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:20:50 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_error(void);
-
-// A standard error message.
 void	print_error(void)
 {
 	ft_putendl_fd("Error\n", 2);
@@ -24,6 +21,10 @@ void	print_error(void)
 
 /*
  * Check if stack a is sorted or not yet.
+ * While there is a next node, if the value of
+ * current node is bigger than the value of the
+ * next node, return zero, if next node exists,
+ * then move the current node to the next node.
  */
 int	is_sorted(t_stack *a)
 {
@@ -92,9 +93,7 @@ int	main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
-	int	i;
-
-	i = 0;
+	
 	if (argc > 1)
 	{
 		a = init_stack();

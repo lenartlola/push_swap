@@ -6,14 +6,14 @@
 #    By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 14:09:06 by hsabir            #+#    #+#              #
-#    Updated: 2021/11/19 15:10:18 by hsabir           ###   ########.fr        #
+#    Updated: 2021/11/19 16:25:17 by hsabir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 AR = ar -rc
 
@@ -22,7 +22,7 @@ SRCS_DIR = ./operations \
 		   ./algorithms \
 
 OBJS_DIR = ./objs
-
+INC_DIR = .
 LIBFT_DIR = ./libft
 LIBFT = libft.a
 
@@ -62,7 +62,7 @@ $(OBJS_DIR) :
 	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o : %.c | $(OBJS_DIR)
-	@$(CC) $(CFLAGS) -o $@ -I push_swap.h -I$(LIBFT_DIR) -c $^
+	@$(CC) $(CFLAGS) -o $@ -I $(INC_DIR) -I$(LIBFT_DIR) -c $^
 
 clean :
 	@$(MAKE) -C $(LIBFT_DIR) fclean

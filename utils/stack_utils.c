@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:27:29 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 14:28:47 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:13:57 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_stack	*init_stack(void)
 
 	ptr = (t_stack *)malloc(sizeof(t_stack));
 	if (!ptr)
-		return NULL;
+		return (NULL);
 	ptr->size = 0;
 	ptr->top = NULL;
 	ptr->bottom = NULL;
@@ -35,15 +35,15 @@ t_stack	*init_stack(void)
 
 t_node	*init_node()
 {
-	t_node	*Node;
+	t_node	*node;
 
-	Node = (t_node *)malloc(sizeof(t_node));
-	if (!Node)
+	node = (t_node *)malloc(sizeof(t_node));
+	if (!node)
 		return (NULL);
-	Node->value = 0;
-	Node->next = NULL;
-	Node->prev = NULL;
-	return (Node);
+	node->value = 0;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
 }
 
 /*
@@ -99,7 +99,7 @@ int	set_node(char *argv, t_node **node, t_stack **stack)
 		tmp = init_node();
 		if (!tmp)
 			print_error();
-		tmp->value = ft_atoi(args[i]);
+		tmp->value = my_atoi(args[i]);
 		connect_nodes(&tmp, node, stack);
 		(*stack)->size++;
 		free(args[i]);
@@ -121,6 +121,7 @@ t_node	*fill_stack(int argc, char **argv, t_stack **stack)
 	t_node	*node;
 
 	i = 0;
+	node = NULL;
 	while (++i < argc)
 	{
 		ret = set_node(argv[i], &node, stack);

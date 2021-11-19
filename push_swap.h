@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:42:55 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 13:40:46 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/19 16:40:55 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void		check_duplicated(t_node *a);
 int			check_args(char *args);
 t_node	*init_node();
 t_stack	*init_stack(void);
+int	my_atoi(char *args);
 
 // ALGORITHMS
 void	a_to_b(int r, t_stack *a, t_stack *b, int *count);
