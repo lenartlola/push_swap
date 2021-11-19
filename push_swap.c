@@ -14,7 +14,8 @@
 
 void	print_error(void)
 {
-	ft_putendl_fd("Error\n", 2);
+	ft_putendl_fd("Error", 2);
+	exit(0);
 }
 
 // #######################################################
@@ -98,6 +99,7 @@ int	main(int argc, char **argv)
 	{
 		a = init_stack();
 		a->top = fill_stack(argc, argv, &a);
+		check_duplicated(a->top);
 		b = init_stack();
 		if (is_sorted(a))
 		{

@@ -34,7 +34,7 @@ int	my_atoi(char *args)
 	while (args[i])
 		value = value * 10 + (args[i++] - '0');
 	value = value * sign;
-	if (value > MAX_INT || value < MAX_INT)
+	if (value > MAX_INT || value < MIN_INT)
 		print_error();
 	return (value);
 }

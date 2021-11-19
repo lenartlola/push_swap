@@ -48,7 +48,7 @@ static void	push_pop(t_stack *from, t_stack *to)
 		if (to->size == 0)
 		{
 			to->top = from->top;
-			to->bottom = to->bottom;
+			to->bottom = to->top;
 			from->top = from->top->next;
 			from->top->prev = NULL;
 			to->top->next = NULL;
