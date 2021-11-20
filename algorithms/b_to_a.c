@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:56:33 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 13:36:16 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/20 15:20:48 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	exceptions(int r, t_stack *a, t_stack *b)
 		return (0);
 	}
 	else
-		return (0);
+		return (1);
 }
 
 static void	push_rotate_b(t_stack *a, t_stack *b, t_value *var)
@@ -66,7 +66,7 @@ static void	back_to_orig_rb(t_stack *a, t_stack *b, t_value *var)
 	int	rem;
 
 	rrr = var->rb;
-	rem = var->ra - rrr;
+	rem = var->rb - rrr;
 	while (rrr--)
 		reverse_rotate_both_stack(a, b, ALL);
 	while (rem--)

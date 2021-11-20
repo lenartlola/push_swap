@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 08:58:07 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 13:40:20 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/20 14:28:59 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	from_size_one(t_stack *from, t_stack *to)
 	if (to->size == 0)
 	{
 		to->top = from->top;
-		to->bottom = to->bottom;
+		to->bottom = to->top;
 	}
 	else
 	{
