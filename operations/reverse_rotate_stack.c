@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 09:48:09 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 15:07:41 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/20 11:21:24 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	reverse_rotate_stack(t_stack *stack, int flag)
 	t_node	*tmp;
 	t_node	*bottom_prev;
 
-	if (stack->size)
+	if (stack->size < 2)
 		return ;
 	tmp = stack->bottom;
 	bottom_prev = stack->bottom->prev;
