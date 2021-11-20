@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:56:33 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/20 15:20:48 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/20 16:50:20 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	back_to_orig_rb(t_stack *a, t_stack *b, t_value *var)
 	int	rrr;
 	int	rem;
 
-	rrr = var->rb;
+	rrr = var->ra;
 	rem = var->rb - rrr;
 	while (rrr--)
 		reverse_rotate_both_stack(a, b, ALL);
