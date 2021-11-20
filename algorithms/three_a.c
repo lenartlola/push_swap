@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 16:59:01 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 14:29:07 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/20 12:04:35 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	three_top_min_a(t_stack *a, int max)
 		{
 			reverse_rotate_stack(a, A);
 			swap_stack(a, A);
-			reverse_rotate_stack(a, A);
 		}
 	}
 	else

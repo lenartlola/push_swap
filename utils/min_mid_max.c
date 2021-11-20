@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:21:06 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 14:26:45 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/20 11:46:36 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	five_sort(int value[])
 		j = -1;
 		while (++j < i)
 		{
-			if (value[i] > value[j+1])
+			if (value[j] > value[j+1])
 			{
 				tmp = value[j + 1];
 				value[j + 1] = value[j];
