@@ -5,6 +5,8 @@ the project. I know if you're interested in this repository
 in any way, so it is for obvious reasons, and you know well
 the problem.
 
+Used data structure, doubly linked list.
+
 ```
      ┌────────────────┐
 ┌────┤  t_node *top   │
