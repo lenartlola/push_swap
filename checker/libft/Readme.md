@@ -1,5 +1,8 @@
 # libft.h
+## Current status: [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/hsabir/Libft)](https://github.com/JaeSeoKim/badge42)
+
 ## A collections of standard C library functions with some additional ones.
+
 
 The aim of this project is to re-create some standard C library functions including some additional ones the functions created in Libft will become the basic building blocks of later projects that we are going to create in the later of the program.
 Using C standard library at 42 is strictly forbidden, the only functions we're allowed to use are "write(), malloc(), free()", we as well have access to "size_t, and NULL" to create our own functions.
@@ -167,13 +170,13 @@ Here are some good resources I used in order to achieve my project:
 - [How to code](https://stackoverflow.com/)
 
 ### Testing functions
-In the time of writing this first version of the manual I have not built my own tester even though it should be a part of the project, but anyway I came out with some good developed tester for the purpose and I personally used two of them, feel free to on internet to find other testers.
+In the time of writing this first version of the manual, I have not built my own tester even though it should be a part of the project. But anyway, I came out with some good developed tester for the purpose, and I personally used two of them. feel free to search on internet to find more.
 - [libft-unit-test](https://github.com/alelievr/libft-unit-test)
 - [libftTester](https://github.com/Tripouille/libftTester)
 
 ## License
 
-42Lausanne
+MIT
 
 **Free Software, Hell Yeah!**
 

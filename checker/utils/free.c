@@ -1,21 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 14:22:36 by hsabir            #+#    #+#             */
-/*   Updated: 2021/10/12 14:28:58 by hsabir           ###   ########.fr       */
+/*   Created: 2021/11/19 13:16:34 by hsabir            #+#    #+#             */
+/*   Updated: 2021/11/22 14:26:13 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-int	ft_isdigit(int c)
+static void	free_stack(t_stack *stack)
 {
-	if (c > 47 && c < 58)
-		return (1);
-	else
-		return (0);
+	t_node	*node;
+	t_node	*tmp;
+
+	node = stack->top;
+	while (node)
+	{
+		if (node->next)
+			tmp = node->next;
+		else
+			tmp = NULL;
+		free(node);
+		if (tmp)
+			node = tmp;
+		else
+			break ;
+	}
+	free(stack);
+}
+
+void	free_all(t_stack *a, t_stack *b)
+{
+	free_stack(a);
+	free_stack(b);
 }

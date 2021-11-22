@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:42:55 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/20 14:44:13 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/22 14:24:32 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
@@ -25,24 +24,24 @@
 # define B 2
 # define ALL 3
 
-typedef struct	s_node	t_node;
-typedef struct	s_value	t_value;
+typedef struct s_node	t_node;
+typedef struct s_value	t_value;
 
 struct	s_node
 {
-	int	value;
+	int		value;
 	t_node	*prev;
 	t_node	*next;
 };
 
-typedef struct	s_stack
+typedef struct s_stack
 {
-	int	size;
+	int		size;
 	t_node	*top;
 	t_node	*bottom;
 }	t_stack;
 
-struct	s_value
+struct s_value
 {
 	long	big_pivot;
 	long	small_pivot;
@@ -79,11 +78,11 @@ int		set_node(char *argv, t_node **node, t_stack **stack);
 void	connect_nodes(t_node **tmp, t_node **node, t_stack **stack);
 
 //CHECK UTILS
-void		check_duplicated(t_node *a);
-int			check_args(char *args);
-t_node	*init_node();
+void	check_duplicated(t_node *a);
+int		check_args(char *args);
+t_node	*init_node(void);
 t_stack	*init_stack(void);
-int	my_atoi(char *args);
+int		my_atoi(char *args);
 
 // ALGORITHMS
 void	a_to_b(int r, t_stack *a, t_stack *b, int *count);
@@ -99,10 +98,10 @@ void	under_three_handler(int r, t_stack *a, t_stack *b, int flag);
 void	two_handler(t_stack *a, t_stack *b, int flag);
 
 // MIN_MID_MAX
-int	get_max_value(t_node *node, int size);
-int	get_min_value(t_node *node, int size);
-int	get_mid_five(t_node *node);
+int		get_max_value(t_node *node, int size);
+int		get_min_value(t_node *node, int size);
+int		get_mid_five(t_node *node);
 
-void		print_error(void);
+void	print_error(void);
 
 #endif

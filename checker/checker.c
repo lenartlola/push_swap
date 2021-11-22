@@ -5,27 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 12:42:49 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/22 14:31:08 by hsabir           ###   ########.fr       */
+/*   Created: 2021/11/19 13:48:04 by hsabir            #+#    #+#             */
+/*   Updated: 2021/11/22 14:30:32 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	print_error(void)
-{
-	ft_putendl_fd("Error", 2);
-	exit(0);
-}
-
-/*
- * Check if stack a is sorted or not yet.
- * While there is a next node, if the value of
- * current node is bigger than the value of the
- * next node, return zero, if next node exists,
- * then move the current node to the next node.
- */
-int	is_sorted(t_stack *a)
+int		is_sorted(t_stack *a)
 {
 	t_node	*node;
 
@@ -48,30 +35,35 @@ int	is_sorted(t_stack *a)
 		return (0);
 }
 
-/*
- * Declare the stacks and take the arguments,
- * if no argument is given return an error message.
- * while there is an argument left init the stack a,
- * and fill it with the arguments.
- */
-
-int	main(int argc, char **argv)
+void	check_operations(char *buf, t_stack *a, t_stack *b)
 {
-	t_stack	*a;
-	t_stack	*b;
+	if (!ft_strcmp("pa", buf) || !ft_strcmp("pb", buf))
+		do_push(buf, a, b);
+	else if (!ft_strcmp("sa", buf) || !ft_strcmp("sb", buf) ||
+	!ft_strcmp("ss", buf))
+		do_swap(buf, a, b);
+	else if (!ft_strcmp("ra", buf) || !ft_strcmp("rb", buf) ||
+	!ft_strcmp("rr", buf))
+		do_rotate(buf, a, b);
+	else if (!ft_strcmp("rra", buf) || !ft_strcmp("rrb", buf) ||
+	!ft_strcmp("rrr", buf))
+		do_reverse_rotate(buf, a, b);
+	else
+		print_error();
+}
 
-	if (argc > 1)
+void	checker(t_stack *a, t_stack *b)
+{
+	char	*buf;
+
+	while (get_next_line(0, &buf) > 0)
 	{
-		a = init_stack();
-		a->top = fill_stack(argc, argv, &a);
-		check_duplicated(a->top);
-		b = init_stack();
-		if (is_sorted(a))
-		{
-			free_all(a, b);
-			return (0);
-		}
-		push_swap(a, b);
-		free_all(a, b);
+		check_operations(buf, a, b);
+		free(buf);
 	}
+	free(buf);
+	if (is_sorted(a) && !b->top)
+		ft_putendl_fd("OK", 1);
+	else
+		ft_putendl_fd("KO", 1);
 }

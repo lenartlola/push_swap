@@ -6,7 +6,7 @@
 #    By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 13:50:51 by hsabir            #+#    #+#              #
-#    Updated: 2021/11/09 10:40:42 by hsabir           ###   ########.fr        #
+#    Updated: 2021/10/18 16:19:59 by hsabir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,9 @@ SRCS = ft_atoi.c\
 		ft_memcpy.c\
 		ft_memmove.c\
 		ft_memset.c\
-		ft_putchar.c\
 		ft_putchar_fd.c\
 		ft_putendl_fd.c\
 		ft_putnbr_fd.c\
-		ft_putstr.c\
 		ft_putstr_fd.c\
 		ft_split.c\
 		ft_strchr.c\

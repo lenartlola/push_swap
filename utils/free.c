@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 13:16:34 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/19 14:26:36 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/11/22 14:26:13 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	free_stack(t_stack *stack)
 		if (tmp)
 			node = tmp;
 		else
-			break;
+			break ;
 	}
 	free(stack);
 }
