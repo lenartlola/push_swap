@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../checker.h"
 
 /* I use a special kind of atoi, therefore I'll implement
  * my_atoi function which will handle some error cases.

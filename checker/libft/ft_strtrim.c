@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	ft_strcmp(char c, char const *set)
+static int	ft_strllcmp(char c, char const *set)
 {
 	size_t	i;
 
@@ -36,10 +36,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	start = 0;
 	if (s1 == NULL || set == NULL)
 		return (NULL);
-	while (s1[start] && ft_strcmp(s1[start], set))
+	while (s1[start] && ft_strllcmp(s1[start], set))
 		start++;
 	end = ft_strlen(s1);
-	while (end > start && ft_strcmp(s1[end - 1], set))
+	while (end > start && ft_strllcmp(s1[end - 1], set))
 		end--;
 	ptr = (char *)malloc(sizeof(*s1) * (end - start + 1));
 	if (!ptr)

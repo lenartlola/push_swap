@@ -18,35 +18,6 @@ void	print_error(void)
 	exit(0);
 }
 
-/*
- * Check if stack a is sorted or not yet.
- * While there is a next node, if the value of
- * current node is bigger than the value of the
- * next node, return zero, if next node exists,
- * then move the current node to the next node.
- */
-int	is_sorted(t_stack *a)
-{
-	t_node	*node;
-
-	node = a->top;
-	while (node)
-	{
-		if (node->next)
-		{
-			if (node->value > node->next->value)
-				return (0);
-		}
-		if (node->next)
-			node = node->next;
-		else
-			break ;
-	}
-	if (node->value == a->bottom->value)
-		return (1);
-	else
-		return (0);
-}
 
 /*
  * Declare the stacks and take the arguments,
@@ -66,12 +37,7 @@ int	main(int argc, char **argv)
 		a->top = fill_stack(argc, argv, &a);
 		check_duplicated(a->top);
 		b = init_stack();
-		if (is_sorted(a))
-		{
-			free_all(a, b);
-			return (0);
-		}
-		push_swap(a, b);
+		checker(a, b);
 		free_all(a, b);
 	}
 }

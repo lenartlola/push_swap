@@ -22,33 +22,33 @@ CFLAGS = -Wall -Wextra -Werror
 
 INCS = ./checker.h \
 	   ./push_swap.h \
-	   ./gnl/get_next_line_bonus.h
+	   ./get_next_line/get_next_line_bonus.h
 
 AR = ar
 ARFLAGS = rc
 
-SRCS_DIR =	./gnl	\
-			./operations	\
-			./utils
+SRCS_DIR =	./get_next_line	\
+		./operations	\
+		./utils
 
 OBJS_DIR = ./objs
 
 LIBFT = libft.a
 LIBFT_DIR = ./libft
 
-SRCS =	./gnl/get_next_line_bonus.c	\
-		./gnl/get_next_line_utils_bonus.c	\
+SRCS =	./get_next_line/get_next_line_bonus.c	\
+		./get_next_line/get_next_line_utils_bonus.c	\
 		./operations/push_pop.c	\
 		./operations/reverse_rotate_stack.c	\
 		./operations/swap.c	\
 		./utils/check_utils.c	\
+		./utils/free.c \
 		./utils/my_atoi.c	\
 		./utils/stack_utils.c	\
 		./utils/min_mid_max.c \
 		./main.c	\
 		./checker.c	\
-		./do_operations.c	\
-		./free.c
+		./do_operations.c
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 
