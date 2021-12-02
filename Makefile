@@ -6,7 +6,7 @@
 #    By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 14:09:06 by hsabir            #+#    #+#              #
-#    Updated: 2021/12/02 13:23:39 by hsabir           ###   ########.fr        #
+#    Updated: 2021/12/02 13:35:32 by hsabir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ all : $(NAME)
 bonus : re
 	@$(MAKE) fclean -C $(BONUS_DIR)
 	@$(MAKE) -C $(BONUS_DIR)
-	@cp $(BONUS_DIR)/checker ./checker
+	@cp checker_bonus/checker ./checker
 
 $(NAME) : $(OBJS)
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -69,11 +69,11 @@ $(OBJS_DIR)/%.o : %.c | $(OBJS_DIR)
 
 clean :
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-##	@$(MAKE) -C bonus_checker fclean
+	@$(MAKE) -C checker_bonus fclean
 	@$(RM) -r $(OBJS_DIR)
 
 fclean : clean
 	@$(RM) $(NAME)
 	@if [ -f ./checker ]; then $(RM) ./checker; fi;
 
-re : fclean all%
+re : fclean all

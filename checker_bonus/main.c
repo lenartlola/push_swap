@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:42:49 by hsabir            #+#    #+#             */
-/*   Updated: 2021/11/22 14:31:08 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/12/02 13:39:11 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	print_error(void)
 	ft_putendl_fd("Error", 2);
 	exit(0);
 }
-
 
 /*
  * Declare the stacks and take the arguments,

@@ -6,7 +6,7 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 11:59:35 by hsabir            #+#    #+#             */
-/*   Updated: 2021/12/02 12:08:55 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/12/02 13:39:50 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ char	*get_next_line(int fd)
 	char		*buf;
 	static char	*s[FD_SIZE];
 	ssize_t		n;
-	
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-		buf = malloc(BUFFER_SIZE + 1);
+	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
 	n = read(fd, buf, BUFFER_SIZE);

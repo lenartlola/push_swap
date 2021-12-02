@@ -6,13 +6,13 @@
 /*   By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 13:48:04 by hsabir            #+#    #+#             */
-/*   Updated: 2021/12/02 13:17:51 by hsabir           ###   ########.fr       */
+/*   Updated: 2021/12/02 13:37:50 by hsabir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int		is_sorted(t_stack *a)
+int	is_sorted(t_stack *a)
 {
 	t_node	*node;
 
