@@ -218,7 +218,7 @@ Struct diagram:
   <img width="80%" src="https://github.com/ioscreams/push_swap/blob/main/diagrams/struct.png">
 </p>
 
-## analyze of the complexity:
+## Analyze of the complexity:
 TODO
 
 ## Visualizer:
