@@ -6,7 +6,7 @@
 #    By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/11 13:50:51 by hsabir            #+#    #+#              #
-#    Updated: 2021/10/18 16:19:59 by hsabir           ###   ########.fr        #
+#    Updated: 2022/05/11 09:21:59 by hsabir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,20 +55,20 @@ all: $(NAME)
 #c: Whenever an archive is created, an informational message to that effect is written to standard error. If the -c option is specified, ar creates the archive silently.
 #s: 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 $(OBJS): $(SRCS)
-	gcc $(CFLAGS) $(SRCS)
+	@gcc $(CFLAGS) $(SRCS)
 #So is needed only on linux in order to the unit test work properly
 so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(FILES)
-	gcc -nostartfiles -shared -o libft.so $(OBJS)
+	@$(CC) -nostartfiles -fPIC $(CFLAGS) $(FILES)
+	@gcc -nostartfiles -shared -o libft.so $(OBJS)
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 #    By: hsabir <marvin@42lausanne.ch>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/19 14:09:06 by hsabir            #+#    #+#              #
-#    Updated: 2021/12/02 13:35:32 by hsabir           ###   ########.fr        #
+#    Updated: 2022/05/11 09:23:29 by hsabir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,13 +53,19 @@ RM = rm -f
 all : $(NAME)
 
 bonus : re
+	echo "Compiling bonus checker..."
 	@$(MAKE) fclean -C $(BONUS_DIR)
 	@$(MAKE) -C $(BONUS_DIR)
 	@cp checker_bonus/checker ./checker
+	echo "bonus checker has been compiled..."
 
 $(NAME) : $(OBJS)
+	echo "Compling libft..."
 	@$(MAKE) -C $(LIBFT_DIR)
+	echo "Libft has been compiled..."
+	echo "Compiling push_swap"
 	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft
+	echo "push_swap has been compiled..."
 
 $(OBJS_DIR) :
 	@mkdir -p $(OBJS_DIR)
