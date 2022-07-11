@@ -41,7 +41,7 @@ We are allowed to use at most two stack and manipulate them using a limited set 
      - between 8500 - 10000 instructions -> 2 points.
      - between 10000 - 11500 instructions -> 1 point.
 
-## Illustrate rules:
+## Illustrated operations:
 
 ```
   Stacks at init       Stacks after "pb", "pb"   Stacks after "pb", "pb"
@@ -135,11 +135,11 @@ recursively iterate on stack a
     if the remaining elemnt in stack a is 5 or three or under three
         sort_five/three;
     find the pivots;
-    if the current element is bigger the middle pivot
+    if the current element is bigger than the middle pivot
         do ra;
     else
         do pb;
-        if the current elemnt is bigger than the middle of middle pivot
+        if the current elemnt is bigger than the number at the middle of the middle pivot
             do rb;
             increment a tracker;
 
@@ -148,7 +148,7 @@ while tracker--
     do rrb;
 ```
 
-Those give us something like this:
+Those moves gives us something like this:
 
 ```
 +--------------------------------------------------------+
@@ -207,7 +207,7 @@ This way we first work on and sort chunks of different sizes, then we can work m
 
 TODO: write reverse process pseudo...
 
-## Data structure
+## Data structures
 
 To implement the stacks, we have some choices, we cam with either an array of integer or a linked list, for me it was more reasonable to use a linked list, because we are working on dynamic stacks so we need dynamic structures.
 
@@ -218,8 +218,8 @@ Struct diagram:
   <img width="80%" src="https://github.com/ioscreams/push_swap/blob/main/diagrams/struct.png">
 </p>
 
-## Complexity analyze:
+## Analyze of the complexity:
 TODO
 
-## Visualize:
+## Visualizer:
 TODO
