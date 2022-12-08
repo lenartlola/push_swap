@@ -303,10 +303,10 @@ Figure(4):
 
 ***Some technical details:***
 
-When I solved this problem I have encountered some problems, I had to initialise so many variables to track the state
-of the stacks in each frame, there are probably better and smarter solutions, but I'm not bother fix it right now.
+`When I solved this problem I have encountered some problems, I had to initialise so many variables to track the state
+of the stacks in each frame, there are probably better and smarter solutions, but I'm not bother fix it right now.`
 
-First of all, it was all difficult to sort the chunks in the **stack_b**, I came with an idea of checking
+* First of all, it was all difficult to sort the chunks in the **stack_b**, I came with an idea of checking
 the pushed number if it's part of the medium chunk, if so I would rotate **stack_b** this way I have something similar
 to the Figure(5), and I would track the number of rotation I do in order to reverse rotate the **stack_b** once I have
 done with my loop (Not very smart I know xD), so I created a variable *rrb*, each time I rotate the **stack_b** 
@@ -314,6 +314,11 @@ I increment this variable to track the number of rotation I do, once reverse rot
 One may ask `if we want medium chunk on the top of the stack_b` so why not directly rotate the small instead
 of rotate medium and then reverse rotate it? sounds right, but believe me you will see in a second that would be more
 problematic in the next stack frames.
+* One key thing is to track the number of elements in the **stack_a** inside each frame, let's say for example we have
+  100 initial elements, we know then that we push 50 elements to the **stack_b** and what is rest in the **stack_a** is
+  50, I have created another variable to track this, everytime I rotate the **stack_a**, I increment this variable
+  in order to have the right amount of the elements in the **stack_a**, I will then pass this variable to the function
+  at each frame.
 
 
 Figure(5):
@@ -337,7 +342,7 @@ Figure(5):
 Here is a pseudocode:
 ``` c
 Step(1)
-a_to_b(stacks):
+a_to_b(stacks, size_of_stack):
     if sizeof(stack_a) is 5 or sizeod(stack_a) is 3 or sizeof(stack_a) is smaller than 3
         sort_stack_a_manually(stacks);
     find_pivots(stack_a);
@@ -351,7 +356,7 @@ a_to_b(stacks):
     Step(2)
     while tracker--
         reverse_rotate_stack_b(stack_b);
-    a_to_b(stacks);
+    a_to_b(stacks, number_rotate_stack_a);
 ```
 
 
@@ -413,39 +418,41 @@ do the same logic on it (Note that the two partially sorted chunks would stay in
 to modify them which is a great news because we come back to them in the right time).
 
 Figure(7):
-```
-    Step(1)                           Step(2)
 
-             +----------+                     +----------+ ---------+
-             |          |                     |          |          |
-             | Second   |                     |  Second  |          |
-             | Frame    |                     |  Frame   |          |
-             |          |                     |          |          |
-             | Small    |                     |  Big     |          |
-             |          |                     |          |          |
-             +----------+                     +----------+          | From the current frame call
-             |          |                     |          |          |
-             | First    |                     |  Second  |          |
-             | Frame    |                     |  Frame   |          |
-             |          |                     |          |          |
-             | Big      |                     |  Small   |          |
-             |          |                     |          |          |
-             +----------+                     +----------+ ---------+
-             |          |                     |          |          |
-             | First    |                     |  First   |          |
-             | Frame    |                     |  Frame   |          |
-             |          |                     |          |          |
-             | Small    |                     |  Big     |          |
-             |          |                     |          |          |
-+----------+ +----------+        +----------+ +----------+          | From the last frame call
-|          | |          |        |          | |          |          |
-|  Second  | | Second   |        |  Second  | |  First   |          |
-|  Frame   | | Frame    |        |  Frame   | |  Frame   |          |
-|          | |          |        |          | |          |          |
-|  Big     | | Big      |        |  Big     | |  Small   |          |
-|          | |          |        |          | |          |          |
-+----------+ +----------+        +----------+ +----------+ ---------+
 ```
+    Step(1)                                                           Step(2)
+
+             +----------+ ---------+                                          +----------+ ---------+
+             |          |          |                                          |          |          |
+             | Second   |          |                                          |  Second  |          |
+             | Frame    |          |                                          |  Frame   |          |
+             |          |          | From the current frame call              |          |          |
+             | Small    |          |                                          |  Big     |          |
+             |          |          |                                          |          |          |
+             +----------+ ---------+                                          +----------+          | From the current frameall
+             |          |          |                                          |          |          |
+             | First    |          |                                          |  Second  |          |
+             | Frame    |          |                                          |  Frame   |          |
+             |          |          |                                          |          |          |
+             | Big      |          |                                          |  Small   |          |
+             |          |          |                                          |          |          |
+             +----------+          | From the last frame call                 +----------+ ---------+
+             |          |          |                                          |          |          |
+             | First    |          |                                          |  First   |          |
+             | Frame    |          |                                          |  Frame   |          |
+             |          |          |                                          |          |          |
+             | Small    |          |                                          |  Big     |          |
+             |          |          |                                          |          |          |
++----------+ +----------+ ---------+                             +----------+ +----------+          | From the last frame ca
+|          | |          |          |                             |          | |          |          |
+|  Second  | | Second   |          |                             |  Second  | |  First   |          |
+|  Frame   | | Frame    |          |                             |  Frame   | |  Frame   |          |
+|          | |          |          | From the current frame call |          | |          |          |
+|  Big     | | Big      |          |                             |  Big     | |  Small   |          |
+|          | |          |          |                             |          | |          |          |
++----------+ +----------+ ---------+                             +----------+ +----------+ ---------+
+```
+
 
 **So now what?** I don't know just do it until you reach the condition, and then we would do some similar process in the
 reverse order.

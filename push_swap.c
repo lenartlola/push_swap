@@ -21,13 +21,13 @@ void	init_values(t_value *var)
 	var->pb = 0;
 }
 
-void	select_pivots(int r, t_stack *stack, t_value *var)
+void	select_pivots(int stack_size, t_stack *stack, t_value *var)
 {
 	long	min;
 	long	max;
 
-	min = get_min_value(stack->top, r);
-	max = get_max_value(stack->top, r);
+	min = get_min_value(stack->top, stack_size);
+	max = get_max_value(stack->top, stack_size);
 	var->big_pivot = (min + max) / 2;
 	var->small_pivot = (min + var->big_pivot) / 2;
 }

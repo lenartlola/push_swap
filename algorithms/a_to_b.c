@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+#include <stdio.h>
 
 static int	exceptions(int r, t_stack *a, t_stack *b)
 {
@@ -114,20 +115,20 @@ static void	back_to_orig_rb(t_stack *a, t_stack *b, int *count, t_value *var)
  * as long as it left values.
  */
 
-void	a_to_b(int r, t_stack *a, t_stack *b, int *count)
+void	a_to_b(int stack_size, t_stack *a, t_stack *b, int *count)
 {
 	int		tmp;
 	t_value	var;
 
-	if (!exceptions(r, a, b))
+	if (!exceptions(stack_size, a, b))
 		return ;
 	init_values(&var);
-	select_pivots(r, a, &var);
-	tmp = r;
+	select_pivots(stack_size, a, &var);
+	tmp = stack_size;
 	while (tmp--)
 		push_rotate_a(a, b, &var);
 	if (var.ra > var.rb)
-		back_to_orig_ra(a, b, count, &var);
+        back_to_orig_ra(a, b, count, &var);
 	else
 		back_to_orig_rb(a, b, count, &var);
 	a_to_b(var.ra, a, b, count);

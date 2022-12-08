@@ -56,7 +56,7 @@ void	ft_error(void);
 
 // PUSH_SWAP
 void	push_swap(t_stack *a, t_stack *b);
-void	select_pivots(int r, t_stack *stack, t_value *var);
+void	select_pivots(int stack_size, t_stack *stack, t_value *var);
 void	init_values(t_value *var);
 int		is_sorted(t_stack *a);
 
@@ -85,7 +85,7 @@ t_stack	*init_stack(void);
 int		my_atoi(char *args);
 
 // ALGORITHMS
-void	a_to_b(int r, t_stack *a, t_stack *b, int *count);
+void	a_to_b(int stack_size, t_stack *a, t_stack *b, int *count);
 void	b_to_a(int r, t_stack *a, t_stack *b, int *count);
 void	five_handler(t_stack *a, t_stack *b);
 void	sort_five_handler(int size, t_stack *a, t_stack *b, int flag);
