@@ -316,7 +316,7 @@ of rotate medium and then reverse rotate it? sounds right, but believe me you wi
 problematic in the next stack frames.
 * One key thing is to track the number of elements in the **stack_a** inside each frame, let's say for example we have
   100 initial elements, we know then that we push 50 elements to the **stack_b** and what is rest in the **stack_a** is
-  50, I have created another variable to track this, everytime I rotate the **stack_a**, I increment this variable
+  50, I have created another variable to track this let's say *ra*, everytime I rotate the **stack_a**, I increment this variable
   in order to have the right amount of the elements in the **stack_a**, I will then pass this variable to the function
   at each frame.
 
@@ -354,9 +354,9 @@ a_to_b(stacks, size_of_stack):
             if the pushed number is bigger than the median of median:
                 rotate_stack_b(stack_b);
     Step(2)
-    while tracker--
+    while rrb--
         reverse_rotate_stack_b(stack_b);
-    a_to_b(stacks, number_rotate_stack_a);
+    a_to_b(stacks, ra);
 ```
 
 
