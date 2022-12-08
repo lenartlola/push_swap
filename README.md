@@ -257,7 +257,7 @@ and return to where it was in the last frame.
 
 **Why even bother with all that?**
 
-That's a good question, I have based my algorithm to solve the push_swap problem on quicksort which in turn is based
+That's a good question, I have based my algorithm to solve the `push_swap` problem on quicksort which in turn is based
 on recursion, let's see how a simple quicksort breaks the problem down.
 
 For the case of three and five, I can actually do it manually which was a good exercise to better understand the project,
@@ -282,6 +282,12 @@ The idea is to separate the **stacks** into three chunks in each stack frame, le
 contains only `5` or `3` or under `3` elements, once it reaches this condition then we call the manual algorithms 
 which I discussed above to sort the rest, and then return to the last frame and do something similar 
 in the reverse order (More on it later).
+
+> perhaps, it can be clearer to replace
+
+* big with: 3-4
+* medium: 2
+* small: 1
 
 Figure(4):
 ```
@@ -364,7 +370,7 @@ Figure(6):
 ```
 +--------------------------------------------------------+
 |                                                        |
-|  Stack a contains rondom numbers:                      |
+|  Stack a contains random numbers:                      |
 |            +--------+                                  |
 |            |  xxxx  |                                  |
 |            |  xxxx  | Biggest number somewhere / 2     |
@@ -384,13 +390,14 @@ Figure(6):
 |            |  xxxx  |                                  |        |
 |            |  xxxx  |                                  |        |
 |            |  xxxx  |                                  |        |
-|            |  xxxx  |                                  |        |  Becomes something like this
+|            |  xxxx  |                                  |        |
 |            |  xxxx  |                                  |        |
 |            |  xxxx  |                                  |        |
 |            +--------+                                  |        |
 |                                                        |        |
 +--------------------------------------------------------+        |
                                                                   |
+                                       Becomes something like this|
                                                                   |
 +--------------------------------------------------------+        |
 | Step(1)                      Step(2)                   |        |
@@ -475,3 +482,7 @@ TODO
 
 ## Visualizer:
 TODO
+
+## VIM
+
+put :set lbr into your vimrc
