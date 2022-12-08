@@ -43,6 +43,7 @@ We are allowed to use at most two stack and manipulate them using a limited set 
 
 ## Illustrated operations:
 
+Figure(1):
 ```
   Stacks at init       Stacks after "pb", "pb"   Stacks after "pb", "pb"
         ^                         ^                       ^
@@ -113,43 +114,248 @@ Stacks after "sa"    Stacks after "sb"     Stacks after "ss"
 
 ## Approach:
 
-For the case of three and five, I can actually do it manually wich was a good exercise to better understand the project. So I wrote an algorithm for three and for the five I just put two elements in the **stack b** then apply the three algorithm and then push back the elements from **stack b** into the **stack a**.
+**A word about recursion**
+Before diving deeper, let's take a little overview about recursion and how stack frames look like in C,
+I think it's a crucial part to understand in order to avoid further problems.
 
-The three and five cases was pretty easy the real challenge begun for bigger numbers, we want an algorithm whose complexity remains constant despite a potentially increasing number of elements. It is important as it'll make our algorithm more reliable and whose potential usefulness is greater than most algorithm.  
+It's all about stack frames, whenever you call a function there's a stack frame poping up, holding all the information
+about the function including the return address of where it should return and continue whe the function call ends.
+I don't go into detail about it, but there are great information under the hood if you want to learn more check out
+this great paper about [Calling conventions and stack layout](https://www.cs.cornell.edu/courses/cs4120/2020sp/lectures/18callconv/lec18-sp18.pdf)
 
-After analyzing a bit the existing algorithms I soon realized that the quick sort idea would be a good fit.
-So I based my algorithm on the top of said algorithm.
+For instance that's how a stack frame may look like:
 
-The idea is to find two pivots in the stack a, one in the middle and one middle of middle,
+Figure(2)
+```
++--------------------+
+|  Some_function()   |
+|                    |
+|  some_variable     |
+|  another_variable  |
+|         .          |
+|         .          |
+|         .          |
+|         .          |
+|  Some_logics       |
+|  return_address    |
++--------------------+
+```
+
+*Be aware the return address is not the same as the return value of a function in C-like programs but rather the address
+of where it was just before the function call in order to the program know where to re-start its execution.*
+
+Let's break it down with some examples.
+
+Let's take as example this pseudocode and illustrate the stack frames:
+
+```c
+function(index):
+    index++;
+    if index is 5
+        break;
+    function(index);
+    return;
+
+main_function():
+    index = 0;
+    function(index);
+```
+
+Let's see how each frame looks like.
+
+The first and Initial frame:
+
+Figure(3)
+```
+     +---------------------+
+     | main_function()     |
+     |                     |
+     | index = 0           |
+     |                     |
+ +---+-function(index = 0) |
+ |   |                     |
+ |   | return <------------+---+
+ |   +---------------------|   |
+ |   +---------------------+   |
+ +-->| function(index = 0) |   |
+     |                     |   |
+     | index++;            |   |
+     |                     |   |
+     | if index is 5       |   |
+     |                     |   |
+     |    break;           |   |
+     |                     |   |
+ +---+-function(index = 1) |   |
+ |   |                     |   |
+ |   | return  <-----------+---+
+ |   +---------------------|   |
+ |   +---------------------+   |
+ +-->| function(index = 1) |   |
+     |                     |   |
+     | index++;            |   |
+     |                     |   |
+     | if index is 5       |   |
+     |                     |   |
+     |    break;           |   |
+     |                     |   |
+ +---+-function(index = 2) |   |
+ |   |                     |   |
+ |   | return  <-----------+---+
+ |   +---------------------|   |
+ |   +---------------------+   |
+ +-->| function(index = 2) |   |
+     |                     |   |
+     | index++;            |   |
+     |                     |   |
+     | if index is 5       |   |
+     |                     |   |
+     |    break;           |   |
+     |                     |   |
+ +---+ function(index = 3) |   |
+ |   |                     |   |
+ |   | return  <-----------+---+
+ |   +---------------------|   |
+ |   +---------------------+   |
+ +-->| function(index = 3) |   |
+     |                     |   |
+     | index++;            |   |
+     |                     |   |
+     | if index is 5       |   |
+     |                     |   |
+     |    break;           |   |
+     |                     |   |
+ +---+-function(index = 4) |   |
+ |   |                     |   |
+ |   | return  >-----------+---+
+ |   +---------------------|   |
+ |   +---------------------+   |
+ +---+ function(index = 4) |   |
+     |                     |   |
+     | index++;            |   |
+     |                     |   |
+     | if index is 5       |   |
+     |                     |   |
+     |    break;           |   |
+     |                     |   |
++----+ function(index = 5) |   |
+|    |                     |   |
+|    | return  <-----------+---+
+|    +---------------------|   |
+|    +---------------------+   |
++--->| function(index = 0) |   |
+     |                     |   |
+     | index++;            |   |
+     |                     |   |
+     | if index is 5       |   |
+     |                     |   |
+     |    break;  ---------+---+
+     +---------------------+
+```
+
+As you can see each frame has its own variables, one the recursion function reaches the specified condition it breaks
+and return to where it was in the last frame.
+
+**Why even bother with all that?**
+
+That's a good question, I have based my algorithm to solve the push_swap problem on quicksort which in turn is based
+on recursion, let's see how a simple quicksort breaks the problem down.
+
+For the case of three and five, I can actually do it manually which was a good exercise to better understand the project,
+and test my operations functions.
+So I wrote an algorithm for three and for the case of five I just put two elements in the **stack b** then apply
+the three algorithm and then push back the elements from **stack b** into the **stack a**.
+
+The three and five cases was pretty easy the real challenge begun for bigger numbers,
+we want an algorithm whose complexity remains constant despite a potentially increasing number of elements.
+It is important as it'll make our algorithm more reliable and whose potential usefulness is greater than most algorithm.  
+
+Here is the idea, find two pivots in the **stack a**, a **median** and a **median of median**.
 
 ``` mathematics
-middle = biggest number in stack a / 2
+median = biggest number in stack a / 2
 
-middle of middle = middle / 2
+median_of_median = median / 2
 ```
-This way we can separate our stack a by three different chunks, there is the pseudo code of my algorithm:
 
+The idea is to separate the **stacks** into three chunks in each stack frame, let's say `big, medium, small` for instance
+(The ideal result is shown in figure(4)), and doing it repeatedly until we reach a condition where the **stack a** 
+contains only `5` or `3` or under `3` elements, once it reaches this condition then we call the manual algorithms 
+which I discussed above to sort the rest, and then return to the last frame and do something similar 
+in the reverse order (More on it later).
+
+Figure(4):
+```
+   Stack a      Stack b           
+  +---------+  +---------+        
+  |   xxx   |  |   xxx   |        
+  |   xxx   |  |   xxx   |        
+  |   xxx   |  |  medium |        
+  |   xxx   |  |   xxx   |        
+  |   xxx   |  |   xxx   |        
+  |   Big   |  +---------+        
+  |   xxx   |  |   xxx   |
+  |   xxx   |  |   xxx   |
+  |   xxx   |  |  Small  |
+  |   xxx   |  |   xxx   |
+  |   xxx   |  |   xxx   |
+  +---------+  +---------+
+```
+
+***Some technical details:***
+
+When I solved this problem I have encountered some problems, I had to initialise so many variables to track the state
+of the stacks in each frame, there are probably better and smarter solutions, but I'm not bother fix it right now.
+
+First of all, it was all difficult to sort the chunks in the **stack_b**, I came with an idea of checking
+the pushed number if it's part of the medium chunk, if so I would rotate **stack_b** this way I have something similar
+to the Figure(5), and I would track the number of rotation I do in order to reverse rotate the **stack_b** once I have
+done with my loop (Not very smart I know xD), so I created a variable *rrb*, each time I rotate the **stack_b** 
+I increment this variable to track the number of rotation I do, once reverse rotation is done I get the ideal result from the Figure(4).
+One may ask `if we want medium chunk on the top of the stack_b` so why not directly rotate the small instead
+of rotate medium and then reverse rotate it? sounds right, but believe me you will see in a second that would be more
+problematic in the next stack frames.
+
+
+Figure(5):
+```
+   Stack a      Stack b           
+  +---------+  +---------+        
+  |   xxx   |  |   xxx   |        
+  |   xxx   |  |   xxx   |        
+  |   xxx   |  |  Small  |        
+  |   xxx   |  |   xxx   |        
+  |   xxx   |  |   xxx   |        
+  |   Big   |  +---------+        
+  |   xxx   |  |   xxx   |
+  |   xxx   |  |   xxx   |
+  |   xxx   |  |  Medium |
+  |   xxx   |  |   xxx   |
+  |   xxx   |  |   xxx   |
+  +---------+  +---------+
+```
+
+Here is a pseudocode:
 ``` c
 Step(1)
-recursively iterate on stack a
-    if the remaining elemnt in stack a is 5 or three or under three
-        sort_five/three;
-    find the pivots;
-    if the current element is bigger than the middle pivot
-        do ra;
-    else
-        do pb;
-        if the current elemnt is bigger than the number at the middle of the middle pivot
-            do rb;
-            increment a tracker;
-
-Step(2)
-while tracker--
-    do rrb;
+a_to_b(stacks):
+    if sizeof(stack_a) is 5 or sizeod(stack_a) is 3 or sizeof(stack_a) is smaller than 3
+        sort_stack_a_manually(stacks);
+    find_pivots(stack_a);
+    while stack_a:
+        if the current element in the stack_a us bigger than median:
+            rotate_stack_a(stack_a);
+        else:
+            push_to_stack_b(stacks);
+            if the pushed number is bigger than the median of median:
+                rotate_stack_b(stack_b);
+    Step(2)
+    while tracker--
+        reverse_rotate_stack_b(stack_b);
+    a_to_b(stacks);
 ```
 
-Those moves gives us something like this:
 
+Figure(6):
 ```
 +--------------------------------------------------------+
 |                                                        |
@@ -201,9 +407,48 @@ Those moves gives us something like this:
 +--------------------------------------------------------+
 ```
 
-Then as illustrated in the pseudocode, we continue doing this recursively, until we get 5, 3 or under three elements.
+That's what we get after the first function call, two equal stacks, one contains all the big numbers, the other one
+separated by two partially sorted chunks. We will then recall the same function to the rest of the **stack_a** and
+do the same logic on it (Note that the two partially sorted chunks would stay in the last stack frame, we won't be able
+to modify them which is a great news because we come back to them in the right time).
 
-This way we first work on and sort chunks of different sizes, then we can work more easily on the elements of these chunks.
+Figure(7):
+```
+    Step(1)                           Step(2)
+
+             +----------+                     +----------+ ---------+
+             |          |                     |          |          |
+             | Second   |                     |  Second  |          |
+             | Frame    |                     |  Frame   |          |
+             |          |                     |          |          |
+             | Small    |                     |  Big     |          |
+             |          |                     |          |          |
+             +----------+                     +----------+          | From the current frame call
+             |          |                     |          |          |
+             | First    |                     |  Second  |          |
+             | Frame    |                     |  Frame   |          |
+             |          |                     |          |          |
+             | Big      |                     |  Small   |          |
+             |          |                     |          |          |
+             +----------+                     +----------+ ---------+
+             |          |                     |          |          |
+             | First    |                     |  First   |          |
+             | Frame    |                     |  Frame   |          |
+             |          |                     |          |          |
+             | Small    |                     |  Big     |          |
+             |          |                     |          |          |
++----------+ +----------+        +----------+ +----------+          | From the last frame call
+|          | |          |        |          | |          |          |
+|  Second  | | Second   |        |  Second  | |  First   |          |
+|  Frame   | | Frame    |        |  Frame   | |  Frame   |          |
+|          | |          |        |          | |          |          |
+|  Big     | | Big      |        |  Big     | |  Small   |          |
+|          | |          |        |          | |          |          |
++----------+ +----------+        +----------+ +----------+ ---------+
+```
+
+**So now what?** I don't know just do it until you reach the condition, and then we would do some similar process in the
+reverse order.
 
 TODO: write reverse process pseudo...
 
